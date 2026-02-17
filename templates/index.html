@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="text-center mb-3 double-height">Products</h3>
+
+<form class="row g-2 mb-3" method="POST" action="/add_product">
+<div class="col">
+<input name="name" placeholder="Product Name" class="form-control" required>
+</div>
+<div class="col">
+<input name="price" placeholder="Price" type="number" step="0.01" class="form-control" required>
+</div>
+<div class="col-auto">
+<button class="btn btn-dark">Add</button>
+</div>
+</form>
+
+<div class="row">
+{% for p in products %}
+<div class="col-6 mb-2">
+<div class="card">
+<div class="card-body text-center">
+<h6>{{ p.name }}</h6>
+<p>{{ "%.2f"|format(p.price) }}</p>
+<a href="/cart/add/{{ p.id }}" class="btn btn-sm btn-dark">Add to Cart</a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+<a href="/cart" class="btn btn-outline-dark mt-3">View Cart</a>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+Flask
+Flask-SQLAlchemy
+Flask-Mail
+qrcode
+Pillow
+gunicorn
+psycopg2-binary

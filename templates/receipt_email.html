@@ -1,0 +1,42 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Receipt #{{ sale.id }}</title>
+</head>
+<body style="font-family: monospace; line-height:1.6; color:#000; background:#f7f7f7; padding:10px;">
+<div style="text-align:center;">
+<img src="https://moffassatravellers.co.tz/favicon.ico" style="max-width:120px;">
+</div>
+<div style="text-align:center; font-size:20px; font-weight:bold; letter-spacing:2px;">SMART SHOP</div>
+<pre style="font-family: monospace; background:#fff; padding:10px; border-radius:5px;">
+--------------------------------------------------
+SALE ID:     {{ sale.id }}
+DATE:        {{ sale.date.strftime('%Y-%m-%d %H:%M') }}
+TIN:         123-456-789
+--------------------------------------------------
+ITEM                QTY    PRICE    TOTAL
+--------------------------------------------------
+{% for i in items %}
+{{ i.product.name[:20] }} {{ i.quantity|string }} {{ '%.2f' % i.product.price }} {{ '%.2f' % (i.product.price*i.quantity) }}
+{% endfor %}
+--------------------------------------------------
+Subtotal:           {{ '%.2f' % total }}
+VAT (18%):          {{ '%.2f' % vat }}
+Grand Total:        {{ '%.2f' % grand }}
+--------------------------------------------------
+</pre>
+<div style="text-align:center;">
+<img src="static/qrcodes/{{ qr_image }}" width="120">
+</div>
+<div style="text-align:center; margin-top:10px;">
+<a href="https://facebook.com"><img src="https://www.freepnglogos.com/uploads/facebook-logo-13.png" height="30"></a>
+<a href="https://twitter.com"><img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" height="30"></a>
+<a href="https://instagram.com"><img src="https://www.freepnglogos.com/uploads/instagram-logos-png-images-free-download-2.png" height="30"></a>
+</div>
+</body>
+</html>
+
+

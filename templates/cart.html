@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3 class="mb-3 text-center double-height">Cart</h3>
+
+{% if items %}
+<table class="table">
+<tr><th>Product</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+{% for i in items %}
+<tr>
+<td>{{ i.p.name }}</td>
+<td>
+<a href="/cart/decrease/{{ i.p.id }}" class="btn btn-sm btn-outline-secondary">−</a>
+<span class="mx-2 fw-bold">{{ i.qty }}</span>
+<a href="/cart/increase/{{ i.p.id }}" class="btn btn-sm btn-outline-secondary">+</a>
+</td>
+<td>{{ "%.2f"|format(i.subtotal) }}</td>
+<td><a href="/cart/remove/{{ i.p.id }}" class="btn btn-sm btn-danger">Remove</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<div class="d-flex justify-content-between fw-bold">
+<span>Total</span><span>{{ "%.2f"|format(total) }}</span>
+</div>
+
+<div class="mt-3 d-grid gap-2">
+<a href="/checkout" class="btn btn-dark">Checkout</a>
+<a href="/cart/clear" class="btn btn-outline-danger">Clear Cart</a>
+<a href="/" class="btn btn-outline-secondary">Continue Shopping</a>
+</div>
+
+{% else %}
+<p class="text-center text-muted">Cart is empty</p>
+<a href="/" class="btn btn-dark">Back to Shop</a>
+{% endif %}
+
+{% endblock %}
