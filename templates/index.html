@@ -1,17 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h3 class="text-center mb-3 double-height">Products</h3>
+<h3 class="text-center mb-3 double-height">Haliym Shopping Carts</h3>
 
 <form class="row g-2 mb-3" method="POST" action="/add_product">
 <div class="col">
-<input name="name" placeholder="Product Name" class="form-control" required>
+<input name="name" placeholder="Destination/Trip Name" class="form-control" required>
 </div>
 <div class="col">
 <input name="price" placeholder="Price" type="number" step="0.01" class="form-control" required>
 </div>
 <div class="col-auto">
-<button class="btn btn-dark">Add</button>
+<button class="btn btn-dark">Add Product</button>
 </div>
 </form>
 
@@ -21,8 +21,9 @@
 <div class="card">
 <div class="card-body text-center">
 <h6>{{ p.name }}</h6>
-<p>{{ "%.2f"|format(p.price) }}</p>
-<a href="/cart/add/{{ p.id }}" class="btn btn-sm btn-dark">Add to Cart</a>
+<p>{{ "%.2f"|format(p.price) }}$</p>
+<a href="/cart/add/{{ p.id }}" class="btn btn-sm btn-success">Add to Cart</a><br><br>
+<form action="{{ url_for('delete_product', product_id=p.id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this Product?');"> <button type="submit" class="btn btn-danger btn-lg">Delete</button> </form>
 </div>
 </div>
 </div>

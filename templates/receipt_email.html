@@ -5,36 +5,163 @@
 <head>
 <meta charset="UTF-8">
 <title>Receipt #{{ sale.id }}</title>
+<style>
+   .container{
+      position: relative;
+      width:400px;
+      margin: auto;
+    }
+
+    .background-image{
+       width: 100%;
+       display: block;
+    }
+
+
+    .whatsapp-button{
+       position:absolute;
+       top: 15px;
+       left: 50%;
+       transform: translateX(-50%);
+       background-color: #25D366;
+       color: white;
+       padding: 10px 20px;
+       border-radius: 30px;
+       text-decoration: none;
+       font-weight: bold;
+       display: flex;
+       align-items: center;
+       gap: 8px;
+   }
+
+.whatsapp-button img{
+   width: 20px;
+   height: 20px;
+  }
+
+ .whatsapp-button:hover {
+   background-color: #1ebe5d;
+ }
+ .background-image:a{
+   background-color: green;
+   display:flex;
+   position: relative;
+   color: #fff;
+   border: none;
+   z-index: 999
+   width: 80px;
+   height: 20px;
+   text-align:center;
+   }
+   
+</style>
 </head>
-<body style="font-family: monospace; line-height:1.6; color:#000; background:#f7f7f7; padding:10px;">
+<body style="font-family: monospace; line-height:1.6; color:#000; background:#ffff; padding:10px;">
 <div style="text-align:center;">
-<img src="https://moffassatravellers.co.tz/favicon.ico" style="max-width:120px;">
+<img src="https://moffassatravellers.co.tz/haliym.jpg" style="max-width:120px;border-radius:20px;">
+
+
 </div>
-<div style="text-align:center; font-size:20px; font-weight:bold; letter-spacing:2px;">SMART SHOP</div>
+<div style="text-align:center; font-size:20px; font-weight:bold; letter-spacing:2px;">SHOPPING SYSTEM DODOMA</div>
+<div class="text-center double-height">
+<p class="small">--------------TIN: 123456789-------</p>
+<p class="small">-----------------SALE: {{ sale.id }}------</p>
+<p class="small">--------{{ sale.date }}----------</p>
+</div>
+
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td background="https://moffassatravellers.co.tz/assets/img/shopping.jpg"
+        bgcolor="none"
+        width="500"
+        height="300"
+        valign="top"
+        style="background-size:cover; background-position:center; padding-top:20px;">
+
+      <table align="center">
+        <tr>
+          <td align="center">
+            <a href="https://wa.me/255658500447"
+               style="background:#25D366;
+                      color:white;
+                      padding:12px 25px;
+                      border-radius:30px;
+                      text-decoration:none;
+                      font-weight:bold;
+                      display:inline-block;">
+              <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+                   width="18"
+                   style="vertical-align:middle;">
+              WhatsApp Me! Now!
+            </a>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</div>
 <pre style="font-family: monospace; background:#fff; padding:10px; border-radius:5px;">
---------------------------------------------------
+--------------------------------------------
 SALE ID:     {{ sale.id }}
 DATE:        {{ sale.date.strftime('%Y-%m-%d %H:%M') }}
 TIN:         123-456-789
---------------------------------------------------
+-------------------------------------------
 ITEM                QTY    PRICE    TOTAL
---------------------------------------------------
+-------------------------------------------
 {% for i in items %}
 {{ i.product.name[:20] }} {{ i.quantity|string }} {{ '%.2f' % i.product.price }} {{ '%.2f' % (i.product.price*i.quantity) }}
 {% endfor %}
---------------------------------------------------
+------------------------------------------
+{% for i in sale.items %}
+NAME:               {{ i.product.name }}
+quantity:           {{ '%.2f' % i.qty }}
+
+PRICE:              {{ '%.2f' % i.product.price }}
+-------------------------------------------
+{% endfor %}
 Subtotal:           {{ '%.2f' % total }}
+------------------------------------------
 VAT (18%):          {{ '%.2f' % vat }}
+------------------------------------------
 Grand Total:        {{ '%.2f' % grand }}
---------------------------------------------------
+------------------------------------------
 </pre>
-<div style="text-align:center;">
+<!---<div style="text-align:center;">
 <img src="static/qrcodes/{{ qr_image }}" width="120">
-</div>
+</div> --->
+<table align="center" width="400" cellpadding="0" cellspacing="0" style="position:relative;">
+    <tr>
+        <td align="center" style="position:relative;">
+
+            <!-- Button -->
+            <div style="margin-top:-60px;">
+                <a href="https://wa.me/255658500447"
+                   style="background:#25D366;
+                          color:white;
+                          padding:10px 20px;
+                          border-radius:25px;
+                          text-decoration:none;
+                          font-weight:bold;">
+                    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png"
+                         width="20"
+                         style="vertical-align:middle;">
+                    Chat on WhatsApp
+                </a>
+            </div>
+
+        </td>
+    </tr>
+</table> <br>
+
 <div style="text-align:center; margin-top:10px;">
-<a href="https://facebook.com"><img src="https://www.freepnglogos.com/uploads/facebook-logo-13.png" height="30"></a>
-<a href="https://twitter.com"><img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" height="30"></a>
-<a href="https://instagram.com"><img src="https://www.freepnglogos.com/uploads/instagram-logos-png-images-free-download-2.png" height="30"></a>
+<a href="https://facebook.com/pascaldickson"><img src="https://www.freepnglogos.com/uploads/facebook-logo-13.png" height="30"></a>
+<a href="https://twitter.com/defaultssystem"><img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" height="30"></a>
+<a href="https://instagram.com/defaultssystem"><img src="https://www.freepnglogos.com/uploads/instagram-logos-png-images-free-download-2.png" height="30"></a>
+ <br><p>@defaultssystems ltd dodoma</p>
 </div>
 </body>
 </html>

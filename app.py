@@ -63,9 +63,11 @@ def add_product():
 # ---------- CART ----------
 @app.route("/cart/add/<int:id>")
 def add_to_cart(id):
+    product = Product.query.get_or_404(id)
     cart = session.get("cart", {})
     cart[str(id)] = cart.get(str(id), 0) + 1
     session["cart"] = cart
+    flash(f"Product '{product.name}' Added to A shopping cart", "success")
     return redirect(url_for("index"))
 
 @app.route("/cart")
@@ -136,6 +138,14 @@ def checkout():
 
     return redirect(url_for("receipt", sale_id=sale.id))
 
+@app.route("/product/delete/<int:product_id>", methods=["POST"])
+def delete_product(product_id):
+   product = Product.query.get_or_404(product_id)
+   db.session.delete(product)
+   db.session.commit()
+   flash(f"Product '{product_id}' has been deleted.", "success")
+   return redirect(url_for("index"))
+
 # ---------- RECEIPT ----------
 @app.route("/receipt/<int:sale_id>", methods=["GET","POST"])
 def receipt(sale_id):
@@ -152,12 +162,12 @@ def receipt(sale_id):
 
         try:
             msg = Message(
-                subject=f"TRA Receipt #{sale.id}",
+                subject=f"DEFAULTS EMAILS #{sale.id}",
                 recipients=[email],
                 html=render_template("receipt_email.html", sale=sale, total=total, vat=vat, grand=grand, qr_image=qr_file)
             )
             mail.send(msg)
-            flash("Receipt sent successfully")
+            flash(f"Receipt sent to [{email}] successfully")
         except Exception as e:
             flash(f"Email failed. Use Gmail App Password.{str(e)}")
 

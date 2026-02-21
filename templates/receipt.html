@@ -4,8 +4,8 @@
 <div class="mx-auto bg-white p-3 monospaced" style="max-width:320px;">
 
 <div class="text-center double-height">
-<img src= "https://moffassatravellers.co.tz/favicon.ico"  width="70">
-<h5 class="fw-bold">SMART SHOP</h5>
+<img src= "https://moffassatravellers.co.tz/haliym.jpg"  width="70">
+<h5 class="fw-bold">HALIYM SHOP DODOMA</h5>
 <p class="small">TIN: 123456789</p>
 <p class="small">SALE: {{ sale.id }}</p>
 <p class="small">{{ sale.date }}</p>
@@ -22,14 +22,26 @@
 
 <div class="dashed-line"></div>
 
+
+{% for i in sale.items %}
 <div class="d-flex justify-content-between small">
-<span>TOTAL</span><span>{{ "%.2f"|format(total) }}</span>
+
+<span>QUANTITY</span><span>{{ "%.2f"|format(i.qty) }} </span>
+</div>
+<div class="d-flex justify-content-between small">
+
+<span>PRICE</span><span>{{ "%.2f"|format(i.product.price) }} </span><br><br>
+</div>
+{% endfor %}
+<div class="d-flex justify-content-between small">
+
+<span>TOTAL</span><span>{{ "%.2f"|format(total) }}</span><br><br>
 </div>
 <div class="d-flex justify-content-between small">
 <span>VAT 18%</span><span>{{ "%.2f"|format(vat) }}</span>
 </div>
 <div class="d-flex justify-content-between fw-bold">
-<span>GRAND</span><span>{{ "%.2f"|format(grand) }}</span>
+<span>GRAND_TOTAL</span><span>{{ "%.2f"|format(grand) }}</span>
 </div>
 
 <div class="dashed-line"></div>
